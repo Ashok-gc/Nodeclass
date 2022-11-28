@@ -46,28 +46,30 @@ const postonebook  = (req,res)=>{
     res.status(504).json({"reply": "Cannot post new book in the current id"})
     }
 
+   
 
     
 }
 const deletebook = (req,res) =>{
-    res.status(200).json({"Reply": "Book Deleted successfully"})
+    let newlist = books.filter(function (items){
+        return items.id != req.params.id
+    })
+    res.json(newlist)
 
 
 
 }
 
-const updatebook =(req,res)=>{
-    books.map((item)=> {
-        if(item.id ==req.params.id){
-            item.title=req.body.title
-            item.author = req.body.author
-        }
-    })  
-    // console.log(updatebook)
-    res.json(updatedBook)
+const putonebook = (req,res) =>{
+  let updatedbooks = books.map((item)=>{
+    if(item.id == req.params.id){
+        item.title = req.body.title
+        item.author = req.body.author
+    }
+    return item
+   })
+   res.json(updatedbooks)
+
 }
 
-
-
-
-module.exports = {getAllBooks, updatebook,deletebook,postnewbooks,putonebook,putbook,deletebooks,getonebook,postonebook}
+module.exports = {getAllBooks,postnewbooks,putbook,deletebooks,getonebook,postonebook,deletebook,putonebook}

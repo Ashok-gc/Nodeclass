@@ -42,7 +42,7 @@
 
 
 const express = require('express')
-// const logger = require('./looger')
+const logger = require('./looger')
 const app = express()
 const path =  require('path')
 const port = 3000;
