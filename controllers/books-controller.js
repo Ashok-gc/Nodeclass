@@ -52,10 +52,7 @@ const postonebook  = (req,res)=>{
 const deletebook = (req,res) =>{
     res.status(200).json({"Reply": "Book Deleted successfully"})
 
-}
 
-const putonebook = (req,res) =>{
-    res.status(200).json({"Reply": "Book updated  successfully"})
 
 }
 
