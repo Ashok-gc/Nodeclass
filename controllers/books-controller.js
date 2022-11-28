@@ -65,13 +65,12 @@ const updatebook =(req,res)=>{
             item.title=req.body.title
             item.author = req.body.author
         }
-    })    
-
-
-
+    })  
+    // console.log(updatebook)
+    res.json(updatedBook)
 }
 
 
 
 
-module.exports = {getAllBooks,deletebook,postnewbooks,putonebook,putbook,deletebooks,getonebook,postonebook}
+module.exports = {getAllBooks, updatebook,deletebook,postnewbooks,putonebook,putbook,deletebooks,getonebook,postonebook}
