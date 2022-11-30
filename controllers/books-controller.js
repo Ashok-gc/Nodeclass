@@ -46,8 +46,6 @@ const postonebook  = (req,res)=>{
     res.status(504).json({"reply": "Cannot post new book in the current id"})
     }
 
-   
-
     
 }
 const deletebook = (req,res) =>{
@@ -69,7 +67,7 @@ const putonebook = (req,res) =>{
     return item
    })
    res.json(updatedbooks)
-
+   
 }
 
 module.exports = {getAllBooks,postnewbooks,putbook,deletebooks,getonebook,postonebook,deletebook,putonebook}
