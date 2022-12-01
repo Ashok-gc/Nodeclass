@@ -45,12 +45,17 @@ const express = require('express')
 const logger = require('./looger')
 const app = express()
 const path =  require('path')
-const mongoose = require('mongoose')
 const port = 3000;
 const book_routes = require("./routes/books-router")
 const books = require('./data/books')
+const mongoose =  require("mongoose")
 
 
+
+mongoose.connect('mongodb://127.0.0.1:27017/books')
+.then(()=>{
+    console.log("connected to mongodb server")})
+.catch((err)=>{console.error(err)})
 app.use((req,res,next)=>{
 
     next()

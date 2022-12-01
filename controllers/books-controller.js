@@ -1,18 +1,34 @@
-const books = require('../data/books')
+// const books = require('../data/books')
+const Book =  require('../models/Book')
 
 const getAllBooks = (req,res)=>{
-    res.json(books)
+    Book.find().then((books)=>{
+        res.json(books)
+    }).catch(
+        (err) =>{
+            console.log(err)
+        }
+    )
 }
 
 const postnewbooks = (req,res)=>{
-    let new_book = {
-        'id' : books[books.length-1].id + 1,
-        'title' : req.body.title,
-        'author' : req.body.author
-    }
-    console.log(new_book)
-    books.push(new_book)
-    res.status(201).send(books)
+//     let new_book = {
+//         'id' : books[books.length-1].id + 1,
+//         'title' : req.body.title,
+//         'author' : req.body.author
+//     }
+//     console.log(new_book)
+//     books.push(new_book)
+//     res.status(201).send(books)
+// }
+
+Book.create(req.body).then((book)=>{
+    res.status(201).json(book)
+})
+.catch((err)=>{
+    console.log(err)
+}
+)
 }
 
 const putbook = (req,res)=>{
@@ -46,6 +62,8 @@ const postonebook  = (req,res)=>{
     res.status(504).json({"reply": "Cannot post new book in the current id"})
     }
 
+   
+
     
 }
 const deletebook = (req,res) =>{
@@ -67,7 +85,7 @@ const putonebook = (req,res) =>{
     return item
    })
    res.json(updatedbooks)
-   
+
 }
 
 module.exports = {getAllBooks,postnewbooks,putbook,deletebooks,getonebook,postonebook,deletebook,putonebook}
