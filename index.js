@@ -54,7 +54,12 @@ const mongoose =  require("mongoose")
 
 mongoose.connect('mongodb://127.0.0.1:27017/books')
 .then(()=>{
-    console.log("connected to mongodb server")})
+    console.log("connected to mongodb server")
+    app.listen(port,()=>{
+        console.log(`App is running on port : ${port}`)
+    })
+})
+    
 .catch((err)=>next(err))
 
 
@@ -74,9 +79,7 @@ app.get('^/$|/index(.html)?',(req,res)=>{
 app.use('/books',book_routes)
 
 
-app.listen(port,()=>{
-    console.log(`App is running on port : ${port}`)
-})
+
 
 app.use((err,req,res,next)=>{
 console.log(err)
