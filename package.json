@@ -1,21 +1,25 @@
 {
-  "name": "practice",
+  "name": "demo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "data-fns": "^0.1.8",
     "date-fns": "^2.29.3",
-    "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "mongodb": "^4.12.1",
     "mongoose": "^6.8.0",
     "nodemon": "^2.0.20",
+    "path": "^0.12.7",
+    "prompt-sync": "^4.2.0",
     "uuid": "^9.0.0"
   }
 }
