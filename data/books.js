@@ -1,15 +1,12 @@
-const books = [
+module.exports = [
     {
-        'id' : 1,
-        'title' : 'Rich Dad Poor Dad',
-        'Author' : 'Robert Kiyosaki',
-        
+        "id": 1,
+        "title": "A Game of Thrones",
+        "author": "George RR Martin"
     },
     {
-        'id' : 2,
-        'title' : ' the Alchemist',
-        'author' : 'Paulo Choelo' 
+        "id": 2,
+        "title": "The Fellowship of the Ring",
+        "author": "JRR Tolkien"
     }
 ]
-
-module.exports = books
