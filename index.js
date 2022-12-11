@@ -67,7 +67,7 @@ app.use((req,res,next)=>{
 app.use(express.json())
 
 app.get('^/$|/index(.html)?',(req,res)=>{
-    // res.send("hello World")
+    
     res.sendFile(path.join(__dirname,'views','index.html'))
 })
 
