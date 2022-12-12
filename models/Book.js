@@ -20,7 +20,11 @@ const bookSchema =  mongoose.Schema({
         type : String,
         required  : true,
     },
-    reviews : [reviewschema]
+    reviews : [reviewschema],
+    category:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category'
+    }
 })
 
 module.exports = mongoose.model('Book',bookSchema)
