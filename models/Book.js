@@ -8,8 +8,6 @@ const reviewschema = mongoose.Schema({
     date : {
         type : Date,
         default : Date.now,
-
-
     }
 })
 
@@ -18,11 +16,9 @@ const bookSchema =  mongoose.Schema({
         type : String,
         required: true,
     },
-
     author : {
         type : String,
         required  : true,
-
     },
     reviews : [reviewschema]
 })
