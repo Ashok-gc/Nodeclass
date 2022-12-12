@@ -4,11 +4,7 @@ const Category = require('../models/Category')
 const getAllCategories = (req,res,next)=>{
     Category.find().then((Category)=>{
         res.json(Category)
-    }).catch(
-        (err)=>{
-            next(err)
-        }
-    )
+    }).catch(next)
 }
 
 const createCategory = (req,res,next)=>{
