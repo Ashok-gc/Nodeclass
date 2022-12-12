@@ -11,13 +11,11 @@ const postnewCategory = (req,res,next)=>{
     Category.create(req.body).then((category)=>{
         res.json(category)
     })
-
 }
 
 const deleteCategory = (req,res,next)=>{
-    Category.deleteMany()
-    .then((reply)=>{
-        res.json({"reply": "category deleted"})
+    category.deleteMany().then((reply)=>{
+        res.json(reply)
     })
     .catch(next)
 }
@@ -41,9 +39,7 @@ const deleteCategorybyId = (req,res,next)=>{
     Category.findByIdAndRemove(req.params.category_id).then((reply)=>{
         res.json(reply)
     })
-    .catch(
-        next
-    )
+    .catch(next)
 }
 
 module.exports={getAllCategories,postnewCategory,deleteCategory,getCategorybyId,editCategorybyId,deleteCategorybyId}
