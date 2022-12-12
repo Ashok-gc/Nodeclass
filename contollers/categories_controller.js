@@ -28,12 +28,17 @@ const getCategorybyId = (req,res,next)=>{
     }).catch(next)
 }
 
-const updateCategorybyId = (req,res,next)=>{
+const editCategorybyId = (req,res,next)=>{
+    Category.findByIdAndUpdate(req.params.category_id,{$set : req.body},{new:true})
+    .then((category)=>{
+        res.json(category)
 
+    })
+    .catch(next)
 }
 
 const deleteCategorybyId = (req,res,next)=>{
 
 }
 
-module.exports={getAllCategories,postnewCategory,deleteCategory,getCategorybyId,updateCategorybyId,deleteCategorybyId}
+module.exports={getAllCategories,postnewCategory,deleteCategory,getCategorybyId,editCategorybyId,deleteCategorybyId}
