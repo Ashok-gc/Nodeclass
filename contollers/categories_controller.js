@@ -38,7 +38,12 @@ const editCategorybyId = (req,res,next)=>{
 }
 
 const deleteCategorybyId = (req,res,next)=>{
-
+    Category.findByIdAndRemove(req.params.category_id).then((reply)=>{
+        res.json(reply)
+    })
+    .catch(
+        next
+    )
 }
 
 module.exports={getAllCategories,postnewCategory,deleteCategory,getCategorybyId,editCategorybyId,deleteCategorybyId}
