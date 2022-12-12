@@ -7,7 +7,10 @@ const getAllCategories = (req,res,next)=>{
     }).catch(next)
 }
 
-const createCategory = (req,res,next)=>{
+const postnewCategory = (req,res,next)=>{
+    Category.create(req.body).then((category)=>{
+        res.json(category)
+    })
 
 }
 
@@ -16,12 +19,11 @@ const deleteCategory = (req,res,next)=>{
     .then((reply)=>{
         res.json({"reply": "category deleted"})
     })
-    .catch((err)=>{
-        console.log(err)
-    })
+    .catch(next)
 }
 
 const getCategorybyId = (req,res,next)=>{
+    
 
 }
 
@@ -33,4 +35,4 @@ const deleteCategorybyId = (req,res,next)=>{
 
 }
 
-module.exports={getAllCategories,createCategory,deleteCategory,getCategorybyId,updateCategorybyId,deleteCategorybyId}
+module.exports={getAllCategories,postnewCategory,deleteCategory,getCategorybyId,updateCategorybyId,deleteCategorybyId}
