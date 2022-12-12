@@ -25,10 +25,10 @@ router.route('/:id/reviews')
     .delete(reviewController.deleteReview)
 
 
-router.route('/:id/reviews/:id')
-    .get(reviewController.getAllReviews)
+router.route('/:id/reviews/:reviewid')
+    .get(reviewController.getreviewbyId)
     .post((req,res)=> res.status(501).json({"reply": "Not implemented"}))
-    .put(reviewController.createReview)
-    .delete()
+    .put(reviewController.editreviewbyId)
+    .delete(reviewController.deletereviewbyId)
 
 module.exports = router

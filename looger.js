@@ -9,6 +9,5 @@ const log = (msg) =>{
 }
 
 
-
-////  pure function is easily to test than impure function
+//  pure function is easily to test than impure function
 module.exports= {log};
