@@ -23,8 +23,9 @@ const deleteCategory = (req,res,next)=>{
 }
 
 const getCategorybyId = (req,res,next)=>{
-    
-
+    Category.findById(req.params.category_id).then((category)=>{
+        res.json(category)
+    }).catch(next)
 }
 
 const updateCategorybyId = (req,res,next)=>{
