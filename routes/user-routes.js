@@ -15,9 +15,16 @@ router.post('/register',(req,res,next)=>{
                 if(err) return next(err)
                 let user = new User()
                 user.username = req.body.username
-                user.save().then()
+                user.save().then(user=>{
+                    res.status(201).json({
+                        'status': 'User registered sucessfully',
+                        userId: user._id,
+                        username: user.username
+
+                    })
+                }).catch(next)
             })
-        })
+        }).catch(next)
 })
 
 router.post('/login',(req,res,next)=>{
