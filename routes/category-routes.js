@@ -1,18 +1,17 @@
-const express = require("express")
+const express =  require('express')
 const router = express.Router()
-const categorycontroller=require("../contollers/categories_controller")
+const categorycontroller =  require("../contollers/category_controller")
 
-router.root('/')
-    .get(categorycontroller.getAllCategories)
-    .post(categorycontroller.postnewCategory)
-    .put((req,res)=> res.status(501).json({"reply":"Not Implemented"}))
-    .delete(categorycontroller.deleteCategory)
+router.route('/')
+.get(categorycontroller.getallcategory)
+.post(categorycontroller.postnewcategory)
+.put((req,res)=>{res.status(501).json({"Reply": "Not Implemented"})})
+.delete(categorycontroller.deletecategory)
 
 router.route('/:category_id')
-    .get(categorycontroller.getCategorybyId)
-    .post((req,res)=> res.status(501).json({"reply":"Not Implemented"}))
-    .put(categorycontroller.editCategorybyId)
-    .delete(categorycontroller.deleteCategorybyId)
+.get(categorycontroller.getcategorybyId)
+.post((req,res)=>{res.status(501).json({"Reply": "Not Implemented"})})
+.put(categorycontroller.editcategorybyId)
+.delete(categorycontroller.deletecategorybyId)
 
-
-module.exports=router
+module.exports =  router

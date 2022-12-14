@@ -39,8 +39,12 @@ const path = require("path");
 const port = 3000;
 const book_routes = require("./routes/books-router");
 const category_routes = require("./routes/category-routes");
+const user_routes = require("./routes/user-routes")
 const books = require("./data/books");
 const mongoose = require("mongoose");
+const router = require("./routes/books-router");
+
+mongoose.set('strictQuery', false);
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/books")
@@ -60,6 +64,8 @@ app.get("^/$|/index(.html)?", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
+
+app.use('/user', user_routes)
 app.use("/books", book_routes);
 app.use("/category", category_routes);
 
@@ -67,7 +73,17 @@ app.listen(port, () => {
   console.log(`App is running on port : ${port}`);
 });
 
+
+router.post('/register',(req, res,next)=>{
+
+})
+
+router.post('/login',(req, res,next)=>{
+  res.send("login request")
+})
+
 app.use((err, req, res, next) => {
   console.log(err);
   res.status(500).json({ err: err.message });
 });
+module.exports=router
