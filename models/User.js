@@ -1,16 +1,17 @@
-const mongoose = require('mongoose')
+const mongoose  =  require('mongoose')
 
-const userSchema = mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-        minLength: [5, 'Username should be longer than 5 characters']
+const userSchema =  mongoose.Schema({
+    username : {
+        type : String,
+        required :  true,
+        unique :  true,
+        minLenght: [5, " Username shoulb be longer than five character"]
     },
-    password:{
-        type: String,
-        required: true
+    password : {
+        type : String,
+        required :  true
     }
 
-},{timestamps:true})
-module.exports=mongoose.model('User', userSchema)
+},{timestamps : true})
+
+module.exports = mongoose.model("User",userSchema)
