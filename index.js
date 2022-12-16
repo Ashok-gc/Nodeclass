@@ -42,6 +42,7 @@ const book_routes = require("./routes/books-router");
 const category_routes = require("./routes/category-routes");
 const user_routes = require("./routes/user-routes")
 const books = require("./data/books");
+const auth =require('./middleware/auth')
 const mongoose = require("mongoose");
 
 const router = require("./routes/books-router");
@@ -68,6 +69,8 @@ app.get("^/$|/index(.html)?", (req, res) => {
 
 
 app.use('/user', user_routes)
+app.use(auth.verifyUser)
+
 app.use("/books", book_routes);
 app.use("/category", category_routes);
 
@@ -80,12 +83,16 @@ router.post('/register',(req, res,next)=>{
 
 })
 
+
 router.post('/login',(req, res,next)=>{
   res.send("login request")
 })
 
+
+//error handiling
 app.use((err, req, res, next) => {
-  console.log(err);
-  res.status(500).json({ err: err.message });
+  console.log(err.stack)
+  if(res.statusCode ==200) res.status(500)
+  res.json({"msg":err.message})
 });
 module.exports=router

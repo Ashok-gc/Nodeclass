@@ -9,6 +9,7 @@ router.post("/register", (req, res, next) => {
     .then((user) => {
       if (user != null) {
         let err = new Error(`user ${req.body.username} already exists`);
+        res.status(400)
         return next(err);
       } else {
         bcrypt.hash(req.body.password, 10, (err, hash) => {
@@ -38,6 +39,7 @@ router.post("/login", (req, res, next) => {
         .then(user=>{
             if(user==null){
                 let err = new Error(`User ${req.body.username} has not registered`)
+                res.status(404)
                 return next(err)
             }
             bcrypt.compare(req.body.password, user.password, 
@@ -45,6 +47,7 @@ router.post("/login", (req, res, next) => {
                     if (err) return next(err)
                     if(!status){
                         let err = new Error('Password doesnot match')
+                        res.status(401)
                         return next(err)
                     }
 
