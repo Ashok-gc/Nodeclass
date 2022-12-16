@@ -32,6 +32,7 @@
 
 // fileOperation()
 
+require('dotenv').config()
 const express = require("express");
 const logger = require("./looger");
 const app = express();
@@ -42,6 +43,7 @@ const category_routes = require("./routes/category-routes");
 const user_routes = require("./routes/user-routes")
 const books = require("./data/books");
 const mongoose = require("mongoose");
+
 const router = require("./routes/books-router");
 
 mongoose.set('strictQuery', false);
