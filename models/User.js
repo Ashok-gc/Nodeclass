@@ -5,7 +5,7 @@ const userSchema =  mongoose.Schema({
         type : String,
         required :  true,
         unique :  true,
-        minLenght: [5, " Username shoulb be longer than five character"]
+        minLenght: [5, 'Username shoulb be longer than five character']
     },
     password : {
         type : String,
