@@ -69,7 +69,7 @@ app.get("^/$|/index(.html)?", (req, res) => {
 
 
 app.use('/user', user_routes)
-app.use(auth.verifyUser)
+// app.use(auth.verifyUser)
 
 app.use("/books", book_routes);
 app.use("/category", category_routes);

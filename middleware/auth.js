@@ -7,7 +7,15 @@ const verifyUser = (req, res,next)=>{
         next(err)
     }
     token=req.headers.authorization.split(' ')[1]
-   jwt.verify()
+    jwt.verify(token, process.env.SECRET, (err, decoded)=>{
+        if (err) {
+            return next(err)
+        }
+        else{
+            next()
+        }
+    
+   })
 
 
 }
