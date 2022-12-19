@@ -14,7 +14,7 @@ router.route("/")
     .delete(verifyUser, bookController.deletebooks)
 
 
-router.route('/:id')
+router.use(verifyUser).route('/:id')
     .get(bookController.getonebook)
     .post(bookController.postonebook)
     .delete(bookController.deletebook)
