@@ -15,10 +15,19 @@ const verifyUser = (req, res,next)=>{
             req.user=decoded
             next()
         }
-    
    })
-
+}
+const verifyAdmin = (req,res,next)=>{
+    if(req.user.rol !== 'Admin'){
+        let err= new Err('You are not authorized')
+        res.status(403)
+        return next(err)
+    }
+    next()
 
 }
 
-module.exports={ verifyUser }
+module.exports={ 
+    verifyUser, 
+    verifyAdmin
+}

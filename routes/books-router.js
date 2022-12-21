@@ -3,7 +3,7 @@ const express =  require("express")
 const router = express.Router()
 const bookController = require('../contollers/books_controller')
 const reviewController = require("../contollers/Review_Controllers")
-const { verifyUser } = require("../middleware/auth")
+const { verifyUser, verifyAdmin } = require("../middleware/auth")
 router.route("/")
     .get(bookController.getAllBooks)
     .post(verifyUser, bookController.postnewbooks)
@@ -11,7 +11,7 @@ router.route("/")
     // .put((req,res)=>{
     //     res.status(501).json({"reply": "PUT request not supported"})
     // })
-    .delete(verifyUser, bookController.deletebooks)
+    .delete(verifyUser, verifyAdmin, bookController.deletebooks)
 
 
 router.use(verifyUser).route('/:id')
