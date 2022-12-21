@@ -9,7 +9,7 @@ const reviewschema = mongoose.Schema({
         type : Date,
         default : Date.now,
     },
-    reviewer:{
+    user:{
         type : mongoose.Schema.Types.ObjectId,
         red: 'User'
     }

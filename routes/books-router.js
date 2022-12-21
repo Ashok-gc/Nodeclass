@@ -7,10 +7,10 @@ const { verifyUser } = require("../middleware/auth")
 router.route("/")
     .get(bookController.getAllBooks)
     .post(verifyUser, bookController.postnewbooks)
-    // .put(bookController.putbook)
-    .put((req,res)=>{
-        res.status(501).json({"reply": "PUT request not supported"})
-    })
+    .put(bookController.putbook)
+    // .put((req,res)=>{
+    //     res.status(501).json({"reply": "PUT request not supported"})
+    // })
     .delete(verifyUser, bookController.deletebooks)
 
 
