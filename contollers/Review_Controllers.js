@@ -1,101 +1,130 @@
-const { verifyUser } = require('../middleware/auth')
-const Book = require('../models/Book')
+const { verifyUser } = require("../middleware/auth");
+const Book = require("../models/Book");
 
-
-const getAllReviews = (req,res,next) =>{
-    Book.findById(req.params.id)
-    .then((book)=>{
-        res.json(book.reviews)
+const getAllReviews = (req, res, next) => {
+  Book.findById(req.params.id)
+    .then((book) => {
+      res.json(book.reviews);
     })
-    .catch(next)
+    .catch(next);
+};
 
-}
-
-const createReview = (req,res,next) =>{
-    Book.findById(req.params.id)
-    .then((book)=>{
-        let areview={
-            "body": req.body.body,
-            "user": verifyUser._id
-        }
-        
-        book.reviews.push(areview)
-       book.save().then(
-       (newbook)=>{
-        console.log(verifyUser._id)
-        res.json(newbook.reviews).status(201)
-       }
-       )
-       
+const createReview = (req, res, next) => {
+  Book.findById(req.params.id)
+    .then((book) => {
+      let areview = {
+        body: req.body.body,
+        user: req.user.userid,
+      };
+      console.log(areview);
+      book.reviews.push(areview);
+      book.save().then((newbook) => {
+        console.log(verifyUser._id);
+        res.json(newbook.reviews).status(201);
+      });
     })
-    .catch(next)
+    .catch(next);
+};
 
-}
-
-const deleteReview = (req,res,next) =>{    
-    Book.findById(req.params.id)
-    .then((book)=>{
-        book.reviews = []
-        book.save().then(
-            (b)=>{
-                res.status(200).json(b)
-            }
-        )
+const deleteReview = (req, res, next) => {
+  Book.findById(req.params.id)
+    .then((book) => {
+      book.reviews = [];
+      book.save().then((b) => {
+        res.status(200).json(b);
+      });
     })
-    .catch(next)
+    .catch(next);
+};
 
-}
-
-const getreviewbyId = (req,res,next) => {
-    Book.findById(req.params.id).then((book)=>{
-        the_review = book.reviews.find((item)=> item._id ==req.params.reviewid) 
-        res.json(the_review)
+const getreviewbyId = (req, res, next) => {
+  Book.findById(req.params.id)
+    .then((book) => {
+      the_review = book.reviews.find((item) => item._id == req.params.reviewid);
+      res.json(the_review);
     })
-    .catch(next)
+    .catch(next);
+};
 
-}
+// const editreviewbyId = (req,res,next) => {
 
-const editreviewbyId = (req,res,next) => {
-    Book.findById(req.params.id).then((book)=>{
-     let updates_reviews = book.reviews.map((item)=>{
-        if(item.id ==  req.params.reviewid){
-            item.body = req.body.body
-            
-        }
-        return item
-     })
-     book.reviews = updates_reviews
-     book.save().then(b => res.json(b.reviews))
-    
+//     Book.findById(req.params.id).then((book)=>{
+//         let updates_reviews = book.reviews.map((item)=>{
+//         if(item.id ==  req.params.reviewid){
+//             item.body = req.body.body
 
+//         }
+//         return item
+//      })
+//      book.reviews = updates_reviews
+//      book.save().then(b => res.json(b.reviews))
+
+//     })
+//     .catch(next)
+
+// }
+const editreviewbyId = (req, res, next) => {
+  Book.findById(req.params.id)
+    .then((book) => {
+      the_review = book.reviews.find((item) => item._id == req.params.reviewid);
+
+      if (the_review.user == req.user.userid) {
+        let updates_reviews = book.reviews.map((item) => {
+          if (item.id == req.params.reviewid) {
+            item.body = req.body.body;
+          }
+          return item;
+        });
+        book.reviews = updates_reviews;
+        book.save().then((b) => res.json(b.reviews));
+      } else {
+        res.status(400).send({ reply: "Cannot edit others review" });
+      }
     })
-    .catch(next)
-    
-}
+    .catch(next);
+};
 
+// const deletereviewbyId = (req, res, next) => {
+//   Book.findById(req.params.id)
+//     .then((book) => {
+//       let updates_reviews = book.reviews.filter((item) => {
+//         return item.id != req.params.reviewid;
+//       });
+
+//       book.reviews = updates_reviews;
+//       book.save().then((b) => res.json(b.reviews));
+//     })
+//     .catch(next);
+// };
 const deletereviewbyId = (req,res,next) => {
-
-     Book.findById(req.params.id).then((book)=>{
-     let updates_reviews = book.reviews.filter((item)=>{
-        return item.id !=  req.params.reviewid
-      
-     })
-
-     book.reviews = updates_reviews
-     book.save().then(b => res.json(b.reviews))
+    
     
 
+    Book.findById(req.params.id).then((book)=>{
+       the_review = book.reviews.find((item)=> item._id ==req.params.reviewid)
+       if(the_review.user == req.user.userid){
+
+       
+    let updates_reviews = book.reviews.filter((item)=>{
+       return item.id !=  req.params.reviewid
+     
     })
-    .catch(next)
+
+    book.reviews = updates_reviews
+    book.save().then(b => res.json(b.reviews))
+   
+   } else{
+       res.status(400).send({"reply" : "Cannot edit others review"})
+   }
+})
+   .catch(next)
 }
-
-
 
 module.exports = {
-    getAllReviews,
-    createReview,
-    deleteReview,
-    getreviewbyId,
-    editreviewbyId,
-    deletereviewbyId
-}
+  getAllReviews,
+  createReview,
+  deleteReview,
+  getreviewbyId,
+  editreviewbyId,
+  deletereviewbyId,
+};

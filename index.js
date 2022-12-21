@@ -50,7 +50,7 @@ const router = require("./routes/books-router");
 mongoose.set("strictQuery", false);
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/books")
+  .connect("mongodb://127.0.0.1:27017/newbooks")
   .then(() => {
     console.log("connected to mongodb server");
   })
@@ -86,9 +86,15 @@ router.post("/login", (req, res, next) => {
 });
 
 //error handiling
+// app.use((err, req, res, next) => {
+//   if (res.statusCode == 200) res.status(500)
+//   console.log(err.stack);
+//   res.json({ msg: err.message });
+// });
 app.use((err, req, res, next) => {
   if (res.statusCode == 200) res.status(500);
-  console.log(err.stack);
-  res.json({ msg: err.message });
+  console.log(err);
+  res.status(500).json({ msg: err.message });
 });
+
 module.exports = router;
