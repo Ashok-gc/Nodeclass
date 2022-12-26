@@ -9,9 +9,9 @@ const reviewschema = mongoose.Schema({
         type : Date,
         default : Date.now,
     },
-    user:{
-        type : mongoose.Schema.Types.ObjectId,
-        red: 'User'
+    user : {
+        type:mongoose.Schema.Types.ObjectId,
+        ref : "User"
     }
 })
 
@@ -20,15 +20,17 @@ const bookSchema =  mongoose.Schema({
         type : String,
         required: true,
     },
+
     author : {
         type : String,
         required  : true,
+
     },
     reviews : [reviewschema],
-    category:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category'
+    category : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Category'
     }
-},{timestamps:true})
+},{timestamps : true})
 
 module.exports = mongoose.model('Book',bookSchema)

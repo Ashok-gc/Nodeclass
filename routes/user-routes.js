@@ -61,7 +61,7 @@ router.post("/login", (req, res, next) => {
           username: user.username,
           role: user.role,
         };
-        colsole.log(data);
+        console.log(data);
         jwt.sign(
           data,
           process.env.SECRET,

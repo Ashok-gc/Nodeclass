@@ -8,10 +8,7 @@ const Category =  require("../models/Category")
     .catch(next)
 
  })
-
  const postnewcategory = ((req,res,next)=>{
-   
-
     Category.create(req.body).then((category)=>{
         res.json(category)
     })
@@ -27,7 +24,10 @@ const deletecategory = ((req,res,next)=>{
 })
 
 const getcategorybyId = ((req,res,next)=>{
-    Category.findById(req.params.category_id).then((category)=>{
+    
+    Category.findById(req.params.category_id)
+    .populate('books')
+    .then((category)=>{
         res.json(category)
     }).catch(next)
 

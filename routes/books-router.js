@@ -1,38 +1,16 @@
 
 const express =  require("express")
 const router = express.Router()
+
 const bookController = require('../contollers/books_controller')
 const reviewController = require("../contollers/Review_Controllers")
-const { verifyUser, verifyAdmin } = require("../middleware/auth")
+const {verifyUser, verifyAdmin} =  require("../middleware/auth")
 router.route("/")
     .get(bookController.getAllBooks)
-    .post(verifyUser, bookController.postnewbooks)
+    .post(verifyUser,bookController.postnewbooks)
     .put(bookController.putbook)
-    // .put((req,res)=>{
-    //     res.status(501).json({"reply": "PUT request not supported"})
-    // })
-    .delete(verifyUser, verifyAdmin, bookController.deletebooks)
+    .delete(verifyUser,verifyAdmin,bookController.deletebooks)
 
-
-// router.use(verifyUser).route('/:id')
-//     .get(bookController.getonebook)
-//     .post(bookController.postonebook)
-//     .delete(bookController.deletebook)
-//     .put(bookController.putonebook)
-    
-// router.route('/:id/reviews')
-//     .get(reviewController.getAllReviews)
-//     .post(reviewController.createReview)
-//     .put((req,res )=>{
-//     res.status(501).json({"reply": "Method not supported"})})
-//     .delete(reviewController.deleteReview)
-
-
-// router.route('/:id/reviews/:reviewid')
-//     .get(reviewController.getreviewbyId)
-//     .post((req,res)=> res.status(501).json({"reply": "Not implemented"}))
-//     .put(reviewController.editreviewbyId)
-//     .delete(reviewController.deletereviewbyId)
 
 router.route('/:id')
     .get(bookController.getonebook)
