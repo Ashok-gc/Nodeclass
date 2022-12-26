@@ -13,8 +13,8 @@ const createReview = (req, res, next) => {
   Book.findById(req.params.id)
     .then((book) => {
       let areview = {
-        body: req.body.body,
-        user: req.user.userid,
+        "body": req.body.body,
+        "user": req.user.userid,
       };
       console.log(areview);
       book.reviews.push(areview);
