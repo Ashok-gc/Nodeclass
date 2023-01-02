@@ -14,9 +14,19 @@ router.route('/')
 
     })
     .post(upload.single('profile'),(req,res,next)=>{
-        console.log(req.file)
-        console.log(req.body)
-        res.send('whatever')
+        // console.log(req.file)
+        // console.log(req.body)
+
+        let profile= {
+            ...req.body,
+            image: req.file.filename,
+            user: req.user.userId
+        }
+        // res.send('whatever')
+        Profile.create(profile)
+        .then(profile=>{
+            res.status(201).json(profile)
+        }).catch(next)
     })
 
 module.exports=router
